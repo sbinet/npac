@@ -11,6 +11,8 @@ func main() {
 	evtmax := 400
 	flag.IntVar(&evtmax, "nevts", 400, "number of events to generate")
 
+	flag.Parse()
+
 	const fname = "event.gob"
 	f, err := os.Create(fname)
 	if err != nil {
