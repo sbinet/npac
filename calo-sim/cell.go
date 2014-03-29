@@ -13,9 +13,9 @@ type Cell struct {
 
 // valid address ?
 func (cell Cell) IsValid() bool {
-	if cell.X > CaloNbCellsInXY ||
-		cell.Y > CaloNbCellsInXY ||
-		cell.Layer > CaloNbLayers ||
+	if cell.X > Calo.NbCellsInXY ||
+		cell.Y > Calo.NbCellsInXY ||
+		cell.Layer > Calo.NbLayers ||
 		cell.X < 0 || cell.Y < 0 || cell.Layer < 0 {
 		return false
 	}

@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+var g_sim = NewCaloSim()
+
 func main() {
 	evtmax := 400
 	flag.IntVar(&evtmax, "nevts", 400, "number of events to generate")
