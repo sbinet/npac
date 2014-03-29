@@ -2,6 +2,8 @@
 
 package main
 
+// gnuplot -p -e 'set grid; plot "gauss.txt" with steps'
+
 import (
 	"fmt"
 	"math"
@@ -9,6 +11,7 @@ import (
 	"os"
 
 	"github.com/go-hep/hist"
+	"github.com/go-hep/hplot"
 )
 
 func main() {
@@ -45,5 +48,28 @@ func main() {
 		x := ax.BinLowerEdge(i)
 		y := h.Content(i)
 		fmt.Fprintf(f, "%e %e\n", x, y)
+	}
+
+	// Make a plot and set its title.
+	p, err := hplot.New()
+	if err != nil {
+		panic(err)
+	}
+	p.Title.Text = "Gaussian"
+	p.X.Label.Text = "X"
+	//p.Y.Label.Text = "Y"
+
+	hh, err := hplot.NewH1D(h)
+	if err != nil {
+		panic(err)
+	}
+	p.Add(hh)
+
+	// Draw a grid behind the data
+	p.Add(hplot.NewGrid())
+
+	// Save the plot to a PDF file.
+	if err := p.Save(6, 4, "hist.pdf"); err != nil {
+		panic(err)
 	}
 }
