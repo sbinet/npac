@@ -11,14 +11,14 @@ func run_sim(evt *Event) error {
 	mcene := 50.0
 	evt.McEne = mcene // fixed true energy
 
-	x := rand.Float64() * (Calo.XYMax-Calo.XYMin) + Calo.XYMin
-	y := rand.Float64() * (Calo.XYMax-Calo.XYMin) + Calo.XYMin
+	x := rand.Float64()*(Calo.XYMax-Calo.XYMin) + Calo.XYMin
+	y := rand.Float64()*(Calo.XYMax-Calo.XYMin) + Calo.XYMin
 
-	err = g_sim.SimulateShower(x,y,mcene)
+	err = g_sim.SimulateShower(x, y, mcene)
 	if err != nil {
 		return err
 	}
-	
+
 	evt.Cells = g_sim.CaloData()
 	evt.Pos.X = x
 	evt.Pos.Y = y
